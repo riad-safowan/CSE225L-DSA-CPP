@@ -29,8 +29,8 @@ int Car::speed(int maxSpeed)
 
 int main()
 {
-    cout << "Amar naam AAbir\n";
-    cout << "Amar naam asdfasdfsdaf";
+    cout << "Im Riad Safowan\n";
+    cout << "I love the universe";
 
     // MyClass myObj;
     // myObj.myNum = 15;
