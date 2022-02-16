@@ -13,8 +13,8 @@ public:
         depth = d;
     }
 
-    void printArea(){
-        std::cout<<"Volume: "<< height*width*depth;
+    void printArea() {
+        std::cout << "Volume: " << height * width * depth;
     }
 };
 
