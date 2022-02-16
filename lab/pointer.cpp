@@ -35,7 +35,7 @@ int main() {
     return 0;
 }
 
-// swaping value by passing address
+// swapping value by passing address
 void swap(int* x, int* y) {
     int temp;
     temp = *x;
