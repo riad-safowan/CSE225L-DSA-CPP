@@ -34,7 +34,11 @@ int main(int argc, char const* argv[])
         cout << endl;
     }
 
-    delete[] array;
+    for (int i = 0; i < rows; i++)
+    {
+        delete[] array[i];
+    }
+
     return 0;
 }
 
