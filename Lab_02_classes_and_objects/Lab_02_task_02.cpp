@@ -7,16 +7,19 @@ you to change the size of the array. Make sure that memory is not leaked. */
 
 void dynArr::allocate(int s)
 {
-    int* temp = data;
-    int oldSize = size;
-    delete data;
-    data = new int[s];
-    for (int i = 0; i < size; i++)
+    if (s > size)
     {
-        data[i] = temp[i];
+        int* temp = data;
+        int oldSize = size;
+        delete data;
+        data = new int[s];
+        for (int i = 0; i < size; i++)
+        {
+            data[i] = temp[i];
+        }
+        size = s;
+        delete temp;
     }
-    size = s;
-    delete temp;
 }
 
 int main() {

@@ -38,6 +38,7 @@ int main(int argc, char const* argv[])
     {
         delete[] array[i];
     }
+    delete[] array;
 
     return 0;
 }

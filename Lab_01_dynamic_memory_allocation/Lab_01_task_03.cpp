@@ -34,7 +34,7 @@ int main(int argc, char const* argv[])
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < sizes[i]; j++)
         {
-            cout << *(*(array + i) + j)<<" ";
+            cout << *(*(array + i) + j) << " ";
         }
         cout << endl;
     }
@@ -43,6 +43,7 @@ int main(int argc, char const* argv[])
     {
         delete[] array[i];
     }
+    delete[] array;
 
     return 0;
 }
