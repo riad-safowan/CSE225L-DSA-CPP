@@ -41,17 +41,9 @@ int main() {
         arr3[i]= new int[3];
     }
 
-
     delete [] arr3[0];
     delete [] arr3[1];
     delete [] arr3[2];
-
-
-
-
-
-
-    
 
     return 0;
 }
