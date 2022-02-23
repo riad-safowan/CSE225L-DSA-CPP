@@ -13,14 +13,14 @@ int main() {
     cout << "Enter the number of COLS: ";
     cin >> cols;
 
-    dynArr2D obj = dynArr2D(rows, cols);
+    dynArr2D<float> obj(rows, cols);
 
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++)
         {
             cout << "Enter value for element " << i << " " << j << " : ";
-            int value;
+            float value;
             cin >> value;
             obj.setValue(i, j, value);
         }

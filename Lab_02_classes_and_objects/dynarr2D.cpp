@@ -1,25 +1,28 @@
-#include "dynarr2D.h" 
 #include <iostream> 
+#include "dynarr2D.h" 
 using namespace std;
 
-dynArr2D::dynArr2D()
+template<class T>
+dynArr2D<T>::dynArr2D()
 {
     data = NULL;
     rows = 0;
     cols = 0;
 }
-dynArr2D::dynArr2D(int r, int c)
+template<class T>
+dynArr2D<T>::dynArr2D(int r, int c)
 {
-    data = new int* [r];
+    data = new T * [r];
     for (int i = 0; i < r; i++)
     {
-        data[i] = new int[c];
+        data[i] = new T[c];
     }
     rows = r;
     cols = c;
 }
 
-dynArr2D::~dynArr2D()
+template<class T>
+dynArr2D<T>::~dynArr2D()
 {
     for (int i = 0; i < rows; i++)
     {
@@ -27,20 +30,23 @@ dynArr2D::~dynArr2D()
     }
     delete[] data;
 }
-int dynArr2D::getValue(int r, int c)
+template<class T>
+T dynArr2D<T>::getValue(int r, int c)
 {
     return data[r][c];
 }
-void dynArr2D::setValue(int r, int c, int value)
+template<class T>
+void dynArr2D<T>::setValue(int r, int c, T value)
 {
     data[r][c] = value;
 }
 
-void dynArr2D::allocate(int r, int c)
+template<class T>
+void dynArr2D<T>::allocate(int r, int c)
 {
     if (r >= rows && c >= cols)
     {
-        int** temp = data;
+        T** temp = data;
         int oldRows = rows;
         int oldCols = cols;
         for (int i = 0; i < rows; i++)
@@ -48,10 +54,10 @@ void dynArr2D::allocate(int r, int c)
             delete[] data[i];
         }
         delete[] data;
-        data = new int* [r];
+        data = new T* [r];
         for (int i = 0; i < r; i++)
         {
-            data[i] = new int[c];
+            data[i] = new T[c];
         }
 
         for (int i = 0; i < oldRows; i++)
