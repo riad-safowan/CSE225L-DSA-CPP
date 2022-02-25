@@ -5,7 +5,7 @@ using namespace std;
 input). Assign values to the array elements by taking user inputs and then print the values. Finally de-allocate the array
 using the delete operator. */
 
-int main(int argc, char const* argv[])
+int main()
 {
     cout << "Enter the size of the array : ";
     int size;

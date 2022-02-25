@@ -16,21 +16,21 @@ class Complex {
     friend Complex operator-(int, Complex);
     friend Complex operator-(Complex, int);
 
-    friend Complex operator==(Complex, Complex);
-    friend Complex operator==(int, Complex);
-    friend Complex operator==(Complex, int);
+    friend bool operator==(Complex, Complex);
+    friend bool operator==(int, Complex);
+    friend bool operator==(Complex, int);
 
-    friend Complex operator!=(Complex, Complex);
-    friend Complex operator!=(int, Complex);
-    friend Complex operator!=(Complex, int);
+    friend bool operator!=(Complex, Complex);
+    friend bool operator!=(int, Complex);
+    friend bool operator!=(Complex, int);
 
-    friend Complex operator>(Complex, Complex);
-    friend Complex operator>(int, Complex);
-    friend Complex operator>(Complex, int);
+    friend bool operator>(Complex, Complex);
+    friend bool operator>(int, Complex);
+    friend bool operator>(Complex, int);
 
-    friend Complex operator<=(Complex, Complex);
-    friend Complex operator<=(int, Complex);
-    friend Complex operator<=(Complex, int);
+    friend bool operator<=(Complex, Complex);
+    friend bool operator<=(int, Complex);
+    friend bool operator<=(Complex, int);
 
 private:
     int real, imaginary;
@@ -74,13 +74,15 @@ Complex operator+(Complex a, Complex b) {
 
 Complex operator+(Complex a, int b) {
     Complex sum;
-    sum.imaginary = a.imaginary + b;
+    sum.real = a.real + b;
+    sum.imaginary = a.imaginary;
     return sum;
 }
 
 Complex operator+(int a, Complex b) {
     Complex sum;
     sum.real = a + b.real;
+    sum.imaginary = b.imaginary;
     return sum;
 }
 
@@ -93,13 +95,15 @@ Complex operator-(Complex a, Complex b) {
 
 Complex operator-(Complex a, int b) {
     Complex sum;
-    sum.imaginary = a.imaginary - b;
+    sum.real = a.real - b;
+    sum.imaginary = a.imaginary;
     return sum;
 }
 
 Complex operator-(int a, Complex b) {
     Complex sum;
     sum.real = a - b.real;
+    sum.imaginary = b.imaginary;
     return sum;
 }
 
@@ -124,6 +128,31 @@ Complex operator*(int a, Complex b) {
     return product;
 }
 
+bool operator==(Complex a, Complex b) {
+    return a.real == b.real && a.imaginary == b.imaginary;
+}
+
+bool operator==(Complex a, int b) {
+    return a.real == b && a.imaginary == 0;
+}
+
+bool operator==(int a, Complex b) {
+    return a == b.real && 0 == b.imaginary;
+}
+
+bool operator!=(Complex a, Complex b) {
+    return a.real != b.real || a.imaginary != b.imaginary;
+}
+
+bool operator!=(Complex a, int b) {
+    return a.real != b || a.imaginary != 0;
+}
+
+bool operator!=(int a, Complex b) {
+    return a != b.real || 0 != b.imaginary;
+}
+
+
 int main() {
     Complex c1(2, 3);
     Complex c2(4, 5);
@@ -134,7 +163,7 @@ int main() {
     result = c1 + c2;
     c1.Print();cout << " + "; c2.Print();cout << " = "; result.Print(); cout << endl;
     result = c1 + num;
-    c1.Print();cout << " +   " << num << "i = "; result.Print(); cout << endl;
+    c1.Print();cout << " +    " << num << " = "; result.Print(); cout << endl;
     result = num + c2;
     cout << num << "    + "; c2.Print();cout << " = "; result.Print(); cout << endl << endl;
 
@@ -142,7 +171,7 @@ int main() {
     result = c1 - c2;
     c1.Print();cout << " - "; c2.Print();cout << " = "; result.Print();cout << endl;
     result = c1 - num;
-    c1.Print();cout << " -   " << num << "i = "; result.Print(); cout << endl;
+    c1.Print();cout << " -    " << num << " = "; result.Print(); cout << endl;
     result = num - c2;
     cout << num << "    - "; c2.Print();cout << " = "; result.Print(); cout << endl << endl;
 
@@ -150,9 +179,19 @@ int main() {
     result = c1 * c2;
     c1.Print();cout << " * "; c2.Print();cout << " = "; result.Print();cout << endl;
     result = c1 * num;
-    c1.Print();cout << " *   " << num << "i = "; result.Print(); cout << endl;
+    c1.Print();cout << " *    " << num << " = "; result.Print(); cout << endl;
     result = num * c2;
     cout << num << "    * "; c2.Print();cout << " = "; result.Print(); cout << endl << endl;
+
+    // == operator
+    c1.Print();cout << " == "; c2.Print();cout << " -> " << ((c1 == c2) ? "True" : "False") << endl;
+    c1.Print();cout << " ==   " << num << "  -> " << ((c1 == num) ? "True" : "False") << endl;
+    cout << num << "    == "; c2.Print();cout << " -> " << ((num == c2) ? "True" : "False") << endl << endl;
+
+    // != operator
+    c1.Print();cout << " != "; c2.Print();cout << " -> " << ((c1 != c2) ? "True" : "False") << endl;
+    c1.Print();cout << " !=   " << num << "  -> " << ((c1 != num) ? "True" : "False") << endl;
+    cout << num << "    != "; c2.Print();cout << " -> " << ((num != c2) ? "True" : "False") << endl << endl;
 
     
 
