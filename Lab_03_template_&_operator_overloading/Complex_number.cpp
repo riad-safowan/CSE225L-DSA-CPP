@@ -40,6 +40,7 @@ public:
     Complex(int, int);
     int sum(int, int);
     void Print();
+    ~Complex();
 };
 #endif
 
