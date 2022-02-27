@@ -1,55 +1,22 @@
-#ifndef MY_LIST1
-#define MY_LIST1
 #include <iostream>
+#include "item_type.cpp"
 using namespace std;
 
 const int MAX_ITEM = 5;
-enum RelationType { LESS, EQUAL, GREATER };
-
-class ItemType
-{
-private:
-
-public:
-    ItemType() {};
-    ItemType(int);
-    RelationType ComparedTo(ItemType) const;
-    void Print() const;
-    void Initialize(int number);
-    int value;
-};
-#endif
-ItemType::ItemType(int v) {
-    value = v;
-}
-
-RelationType ItemType::ComparedTo(ItemType otherItem) const
-{
-    if (value < otherItem.value)
-        return LESS;
-    else if (value > otherItem.value)
-        return GREATER;
-    else return EQUAL;
-}
-void ItemType::Print() const
-{
-    cout << value << endl;
-}
-void ItemType::Initialize(int number)
-{
-    value = number;
-}
 
 class UnsortedType {
 public:
     UnsortedType();
-    bool isFull() const;
-    int getLength() const;
-    ItemType getItem(ItemType, bool&);
-    void putItem(ItemType);
-    void deleteItem(ItemType);
-    void resetList();
-    ItemType getNextItem();
+
+
+    void MakeEmpty();
+    bool IsFull() const;
+    int GetLength() const;
+    ItemType GetItem(ItemType, bool&);
+    void PutItem(ItemType);
+    void DeleteItem(ItemType);
+    void ResetList();
+    ItemType GetNextItem();
 
 private:
     int length = 0;
@@ -57,28 +24,21 @@ private:
     int currentPos = 0;
 };
 
-UnsortedType::UnsortedType()
-{
+void UnsortedType::MakeEmpty() {
     length = 0;
 }
 
-void UnsortedType::putItem(ItemType item)
-{
-    info[length] = item;
-    length++;
-}
-
-int UnsortedType::getLength() const
-{
-    return length;
-}
-
-bool UnsortedType::isFull() const
+bool UnsortedType::IsFull() const
 {
     return (length == MAX_ITEM);
 }
 
-ItemType UnsortedType::getItem(ItemType item, bool& found)
+int UnsortedType::GetLength() const
+{
+    return length;
+}
+
+ItemType UnsortedType::GetItem(ItemType item, bool& found)
 {
     bool moreToSearch;
     int location = 0;
@@ -98,7 +58,13 @@ ItemType UnsortedType::getItem(ItemType item, bool& found)
     return item;
 }
 
-void UnsortedType::deleteItem(ItemType item)
+void UnsortedType::PutItem(ItemType item)
+{
+    info[length] = item;
+    length++;
+}
+
+void UnsortedType::DeleteItem(ItemType item)
 {
     int location = 0;
     while (item.ComparedTo(info[location]) != EQUAL)
@@ -107,12 +73,12 @@ void UnsortedType::deleteItem(ItemType item)
     length--;
 }
 
-void UnsortedType::resetList()
+void UnsortedType::ResetList()
 {
     currentPos = -1;
 }
 
-ItemType UnsortedType::getNextItem()
+ItemType UnsortedType::GetNextItem()
 {
     currentPos++;
     return info[currentPos];
@@ -123,27 +89,27 @@ int main() {
     UnsortedType list;
 
     ItemType i1(5);
-    list.putItem(i1);
-    list.putItem(ItemType(10));
-    list.putItem(ItemType(15));
-    list.putItem(ItemType(20));
-    list.putItem(ItemType(25));
+    list.PutItem(i1);
+    list.PutItem(ItemType(10));
+    list.PutItem(ItemType(15));
+    list.PutItem(ItemType(20));
+    list.PutItem(ItemType(25));
 
     for (int i = 0; i < 5; i++)
     {
-        list.getNextItem().Print();
+        list.GetNextItem().Print();
     }
-    list.resetList();
+    list.ResetList();
 
-    list.deleteItem(ItemType(10));
-    list.putItem(ItemType(8888));
+    list.DeleteItem(ItemType(10));
+    list.PutItem(ItemType(8888));
 
     cout << endl;
     for (int i = 0; i < 5; i++)
     {
-        list.getNextItem().Print();
+        list.GetNextItem().Print();
     }
-    list.resetList();
+    list.ResetList();
 
     return 0;
 }
