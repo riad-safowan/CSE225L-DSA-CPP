@@ -40,45 +40,47 @@ void ItemType::Initialize(int number)
     value = number;
 }
 
+template<class T>
 class UnsortedType {
 public:
     UnsortedType();
     bool isFull() const;
     int getLength() const;
-    ItemType getItem(ItemType, bool&);
-    void putItem(ItemType);
-    void deleteItem(ItemType);
+    T getItem(T, bool&);
+    void putItem(T);
+    void deleteItem(T);
     void resetList();
-    ItemType getNextItem();
+    T getNextItem();
 
 private:
     int length = 0;
-    ItemType info[MAX_ITEM];
+    T info[MAX_ITEM];
     int currentPos = 0;
 };
 
-UnsortedType::UnsortedType()
+template<class T>
+UnsortedType<T>::UnsortedType()
 {
     length = 0;
 }
-
-void UnsortedType::putItem(ItemType item)
+template<class T>
+void UnsortedType<T>::putItem(T item)
 {
     info[length] = item;
     length++;
 }
-
-int UnsortedType::getLength() const
+template<class T>
+int UnsortedType<T>::getLength() const
 {
     return length;
 }
-
-bool UnsortedType::isFull() const
+template<class T>
+bool UnsortedType<T>::isFull() const
 {
     return (length == MAX_ITEM);
 }
-
-ItemType UnsortedType::getItem(ItemType item, bool& found)
+template<class T>
+T UnsortedType<T>::getItem(T item, bool& found)
 {
     bool moreToSearch;
     int location = 0;
@@ -97,8 +99,8 @@ ItemType UnsortedType::getItem(ItemType item, bool& found)
     }
     return item;
 }
-
-void UnsortedType::deleteItem(ItemType item)
+template<class T>
+void UnsortedType<T>::deleteItem(T item)
 {
     int location = 0;
     while (item.ComparedTo(info[location]) != EQUAL)
@@ -106,13 +108,13 @@ void UnsortedType::deleteItem(ItemType item)
     info[location] = info[length - 1];
     length--;
 }
-
-void UnsortedType::resetList()
+template<class T>
+void UnsortedType<T>::resetList()
 {
     currentPos = -1;
 }
-
-ItemType UnsortedType::getNextItem()
+template<class T>
+T UnsortedType<T>::getNextItem()
 {
     currentPos++;
     return info[currentPos];
@@ -120,7 +122,7 @@ ItemType UnsortedType::getNextItem()
 
 
 int main() {
-    UnsortedType list;
+    UnsortedType<ItemType> list;
 
     ItemType i1(5);
     list.putItem(i1);
