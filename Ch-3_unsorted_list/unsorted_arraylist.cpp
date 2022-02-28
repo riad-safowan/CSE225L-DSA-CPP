@@ -5,10 +5,8 @@ using namespace std;
 const int MAX_ITEM = 5;
 
 class UnsortedType {
+
 public:
-    UnsortedType();
-
-
     void MakeEmpty();
     bool IsFull() const;
     int GetLength() const;
