@@ -11,7 +11,9 @@ public:
     ItemType(int);
     RelationType ComparedTo(ItemType) const;
     void Print() const;
+    void Println() const;
     void Initialize(int number);
+    int GetValue();
 private:
     int value;
 
@@ -33,9 +35,16 @@ RelationType ItemType::ComparedTo(ItemType otherItem) const
 }
 void ItemType::Print() const
 {
+    cout << value << " ";
+}
+void ItemType::Println() const
+{
     cout << value << endl;
 }
 void ItemType::Initialize(int number)
 {
     value = number;
+}
+int ItemType::GetValue() {
+    return value;
 }

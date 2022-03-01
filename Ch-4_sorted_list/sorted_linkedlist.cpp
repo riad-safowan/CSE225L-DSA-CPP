@@ -7,10 +7,10 @@ struct NodeType {
     NodeType* next;
 };
 
-class UnsortedType {
+class SortedType {
 public:
-    UnsortedType();
-    ~UnsortedType();
+    SortedType();
+    ~SortedType();
 
     void MakeEmpty();
     bool IsFull() const;
@@ -27,12 +27,22 @@ private:
     NodeType* currentPos;
 };
 
-UnsortedType::UnsortedType() {
+SortedType::SortedType() {
     length = 0;
     listData = NULL;
 }
 
-bool UnsortedType::IsFull()const {
+void SortedType::MakeEmpty() {
+    NodeType* tempPtr;
+    while (listData != NULL) {
+        tempPtr = listData;
+        listData = listData->next;
+        delete tempPtr;
+    }
+    length = 0;
+}
+
+bool SortedType::IsFull()const {
     NodeType* location;
     try
     {
@@ -46,30 +56,11 @@ bool UnsortedType::IsFull()const {
     }
 }
 
-int UnsortedType::GetLength() const {
+int SortedType::GetLength() const {
     return length;
 }
 
-void UnsortedType::MakeEmpty() {
-    NodeType* tempPtr;
-    while (listData != NULL) {
-        tempPtr = listData;
-        listData = listData->next;
-        delete tempPtr;
-    }
-    length = 0;
-}
-
-void UnsortedType::PutItem(ItemType item) {
-    NodeType* location;
-    location = new NodeType;
-    location->info = item;
-    location->next = listData;
-    listData = location;
-    length++;
-}
-
-ItemType UnsortedType::GetItem(ItemType& item, bool& found) {
+ItemType SortedType::GetItem(ItemType& item, bool& found) {
     bool moreToSearch;
     NodeType* location;
     location = listData;
@@ -92,32 +83,64 @@ ItemType UnsortedType::GetItem(ItemType& item, bool& found) {
     }
     return item;
 }
-
-void UnsortedType::DeleteItem(ItemType item) {
-    NodeType* location = listData;
-    NodeType* tempLocation;
-    if (item.ComparedTo(listData->info) == EQUAL)
+// void SortedType::PutItem(ItemType item) {
+//     NodeType* location;
+//     location = new NodeType;
+//     location->info = item;
+//     location->next = listData;
+//     listData = location;
+//     length++;
+// }
+void SortedType::PutItem(ItemType item) {
+    NodeType* location;
+    location = listData;
+    NodeType* newP = new NodeType;
+    newP->info = item;
+    while (location->next != NULL && item.ComparedTo(location->next->info) == GREATER)
     {
-        tempLocation = location;
-        listData = listData->next;
+        location = location->next;
+    }
+    newP->next = location->next;
+    location->next = newP;
+    length++;
+
+    cout << "#list: ";
+    for (int i = 0; i < length; i++)
+    {
+        GetNextItem().Print();
+    }
+    cout << endl;
+    cout << endl;
+    ResetList();
+}
+
+void SortedType::DeleteItem(ItemType item) {
+    NodeType* location = listData;
+    NodeType* previous;
+    if (item.ComparedTo(location->info) == EQUAL)
+    {
+        listData = location->next;
+        delete location;
+        length--;
     }
     else {
-        while (item.ComparedTo((location->next)->info) != EQUAL)
+        while (item.ComparedTo(location->info) != EQUAL)
         {
+            previous = location;
             location = location->next;
-            tempLocation = location->next;
-            location->next - (location->next)->next;
         }
-        delete tempLocation;
+
+        previous->next = location->next;
+        delete location;
         length--;
     }
 }
 
-void UnsortedType::ResetList() {
+void SortedType::ResetList() {
     currentPos = NULL;
 }
 
-ItemType UnsortedType::GetNextItem() {
+ItemType SortedType::GetNextItem() {
     ItemType item;
     if (currentPos == NULL) {
         currentPos = listData;
@@ -129,7 +152,7 @@ ItemType UnsortedType::GetNextItem() {
     return item;
 }
 
-UnsortedType::~UnsortedType() {
+SortedType::~SortedType() {
     NodeType* tempPtr;
     while (listData != NULL) {
         tempPtr = listData;
@@ -139,7 +162,7 @@ UnsortedType::~UnsortedType() {
 }
 
 int main() {
-    UnsortedType list;
+    SortedType list;
 
     ItemType i1(5);
     list.PutItem(i1);
@@ -155,7 +178,9 @@ int main() {
     list.ResetList();
 
     list.DeleteItem(ItemType(10));
-    list.PutItem(ItemType(8888));
+    list.DeleteItem(ItemType(25));
+    // list.PutItem(ItemType(55));
+    // list.PutItem(ItemType(77));
 
     cout << endl;
     for (int i = 0; i < 5; i++)

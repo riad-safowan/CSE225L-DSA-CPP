@@ -4,7 +4,7 @@ using namespace std;
 
 const int MAX_ITEM = 50;
 
-class UnsortedType {
+class SortedType {
 public:
     void MakeEmpty();
     bool IsFull() const;
@@ -21,21 +21,21 @@ private:
     int currentPos = -1;
 };
 
-void UnsortedType::MakeEmpty() {
+void SortedType::MakeEmpty() {
     length = 0;
 }
 
-bool UnsortedType::IsFull() const
+bool SortedType::IsFull() const
 {
     return (length == MAX_ITEM);
 }
 
-int UnsortedType::GetLength() const
+int SortedType::GetLength() const
 {
     return length;
 }
 
-ItemType UnsortedType::GetItem(ItemType item, bool& found)
+ItemType SortedType::GetItem(ItemType item, bool& found)
 {
     int low = 0, high = length - 1;
     int location = (length - 1) / 2;
@@ -58,7 +58,7 @@ ItemType UnsortedType::GetItem(ItemType item, bool& found)
     return item;
 }
 
-void UnsortedType::PutItem(ItemType item)
+void SortedType::PutItem(ItemType item)
 {
 
     if (length == 0)
@@ -99,7 +99,7 @@ void UnsortedType::PutItem(ItemType item)
 
 }
 
-void UnsortedType::DeleteItem(ItemType item)
+void SortedType::DeleteItem(ItemType item)
 {
     int low = 0, high = length - 1;
     int location = (length - 1) / 2;
@@ -128,12 +128,12 @@ void UnsortedType::DeleteItem(ItemType item)
     }
 }
 
-void UnsortedType::ResetList()
+void SortedType::ResetList()
 {
     currentPos = -1;
 }
 
-ItemType UnsortedType::GetNextItem()
+ItemType SortedType::GetNextItem()
 {
     currentPos++;
     return info[currentPos];
@@ -141,31 +141,31 @@ ItemType UnsortedType::GetNextItem()
 
 
 int main() {
-    UnsortedType list;
+    SortedType list;
 
-    ItemType i1(5);
-    list.PutItem(i1);
-    list.PutItem(ItemType(10));
-    list.PutItem(ItemType(15));
-    list.PutItem(ItemType(20));
-    list.PutItem(ItemType(25));
-    list.PutItem(ItemType(12));
-    list.PutItem(ItemType(10));
+    for (int i = 0; i < 20; i++)
+    {
+        list.PutItem(ItemType(i));
+    }
 
-    cout << "The array: ";
+    list.ResetList();
+    for (int i = 0; i < list.GetLength(); i++)
+    {
+        list.GetNextItem().Print();
+    }
+
+    for (int i = 0; i < 20; i += 2)
+    {
+        list.DeleteItem(ItemType(i));
+    }
+
+    cout << endl;
+    list.ResetList();
     for (int i = 0; i < list.GetLength(); i++)
     {
         list.GetNextItem().Print();
     }
     list.ResetList();
-
-    list.DeleteItem(ItemType(10));
-
-    cout << endl << "The array: ";
-    for (int i = 0; i < list.GetLength(); i++)
-    {
-        list.GetNextItem().Print();
-    }
 
     return 0;
 }

@@ -32,6 +32,16 @@ UnsortedType::UnsortedType() {
     listData = NULL;
 }
 
+void UnsortedType::MakeEmpty() {
+    NodeType* tempPtr;
+    while (listData != NULL) {
+        tempPtr = listData;
+        listData = listData->next;
+        delete tempPtr;
+    }
+    length = 0;
+}
+
 bool UnsortedType::IsFull()const {
     NodeType* location;
     try
@@ -48,25 +58,6 @@ bool UnsortedType::IsFull()const {
 
 int UnsortedType::GetLength() const {
     return length;
-}
-
-void UnsortedType::MakeEmpty() {
-    NodeType* tempPtr;
-    while (listData != NULL) {
-        tempPtr = listData;
-        listData = listData->next;
-        delete tempPtr;
-    }
-    length = 0;
-}
-
-void UnsortedType::PutItem(ItemType item) {
-    NodeType* location;
-    location = new NodeType;
-    location->info = item;
-    location->next = listData;
-    listData = location;
-    length++;
 }
 
 ItemType UnsortedType::GetItem(ItemType& item, bool& found) {
@@ -92,23 +83,33 @@ ItemType UnsortedType::GetItem(ItemType& item, bool& found) {
     }
     return item;
 }
+void UnsortedType::PutItem(ItemType item) {
+    NodeType* location;
+    location = new NodeType;
+    location->info = item;
+    location->next = listData;
+    listData = location;
+    length++;
+}
 
 void UnsortedType::DeleteItem(ItemType item) {
     NodeType* location = listData;
-    NodeType* tempLocation;
-    if (item.ComparedTo(listData->info) == EQUAL)
+    NodeType* previous;
+    if (item.ComparedTo(location->info) == EQUAL)
     {
-        tempLocation = location;
-        listData = listData->next;
+        listData = location->next;
+        delete location;
+        length--;
     }
     else {
-        while (item.ComparedTo((location->next)->info) != EQUAL)
+        while (item.ComparedTo(location->info) != EQUAL)
         {
+            previous = location;
             location = location->next;
-            tempLocation = location->next;
-            location->next - (location->next)->next;
         }
-        delete tempLocation;
+        previous->next = location->next;
+
+        delete location;
         length--;
     }
 }
@@ -146,6 +147,9 @@ int main() {
     list.PutItem(ItemType(10));
     list.PutItem(ItemType(15));
     list.PutItem(ItemType(20));
+    list.PutItem(ItemType(22));
+    list.PutItem(ItemType(23));
+    list.PutItem(ItemType(24));
     list.PutItem(ItemType(25));
 
     for (int i = 0; i < 5; i++)
@@ -154,11 +158,12 @@ int main() {
     }
     list.ResetList();
 
-    list.DeleteItem(ItemType(10));
-    list.PutItem(ItemType(8888));
+    list.DeleteItem(ItemType(25));
+    list.DeleteItem(ItemType(15));
+    // list.DeleteItem(ItemType(15));
 
     cout << endl;
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < list.GetLength(); i++)
     {
         list.GetNextItem().Print();
     }

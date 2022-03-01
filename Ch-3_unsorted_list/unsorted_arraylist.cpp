@@ -19,7 +19,7 @@ public:
 private:
     int length = 0;
     ItemType info[MAX_ITEM];
-    int currentPos = 0;
+    int currentPos = -1;
 };
 
 void UnsortedType::MakeEmpty() {
@@ -67,8 +67,10 @@ void UnsortedType::DeleteItem(ItemType item)
     int location = 0;
     while (item.ComparedTo(info[location]) != EQUAL)
         location++;
-    info[location] = info[length - 1];
-    length--;
+    if (item.ComparedTo(info[location]) == EQUAL) {
+        info[location] = info[length - 1];
+        length--;
+    }
 }
 
 void UnsortedType::ResetList()
@@ -86,24 +88,25 @@ ItemType UnsortedType::GetNextItem()
 int main() {
     UnsortedType list;
 
-    ItemType i1(5);
-    list.PutItem(i1);
-    list.PutItem(ItemType(10));
-    list.PutItem(ItemType(15));
-    list.PutItem(ItemType(20));
-    list.PutItem(ItemType(25));
+    for (int i = 0; i < 20; i++)
+    {
+        list.PutItem(ItemType(i));
+    }
 
-    for (int i = 0; i < 5; i++)
+    list.ResetList();
+    for (int i = 0; i < list.GetLength(); i++)
     {
         list.GetNextItem().Print();
     }
-    list.ResetList();
 
-    list.DeleteItem(ItemType(10));
-    list.PutItem(ItemType(8888));
+    for (int i = 0; i < 20; i += 2)
+    {
+        list.DeleteItem(ItemType(i));
+    }
 
     cout << endl;
-    for (int i = 0; i < 5; i++)
+    list.ResetList();
+    for (int i = 0; i < list.GetLength(); i++)
     {
         list.GetNextItem().Print();
     }
