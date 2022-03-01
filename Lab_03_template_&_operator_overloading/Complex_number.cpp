@@ -1,6 +1,7 @@
 #ifndef COMPLEX_H_INCLUDE
 #define COMPLEX_H_INCLUDE
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 class Complex {
@@ -40,7 +41,6 @@ public:
     Complex(int, int);
     int sum(int, int);
     void Print();
-    ~Complex();
 };
 #endif
 
@@ -62,8 +62,6 @@ void Complex::Print() {
     else {
         cout << real << "+" << imaginary << "i";
     }
-
-
 }
 
 Complex operator+(Complex a, Complex b) {
@@ -153,6 +151,29 @@ bool operator!=(int a, Complex b) {
     return a != b.real || 0 != b.imaginary;
 }
 
+bool operator>(Complex a, Complex b) {
+    return pow((pow(a.real, 2) + pow(a.imaginary, 2)), 0.5) > pow((pow(b.real, 2) + pow(b.imaginary, 2)), 0.5);
+}
+
+bool operator>(Complex a, int b) {
+    return pow((pow(a.real, 2) + pow(a.imaginary, 2)), 0.5) > b;
+}
+
+bool operator>(int a, Complex b) {
+    return a > pow((pow(b.real, 2) + pow(b.imaginary, 2)), 0.5);
+}
+
+bool operator<=(Complex a, Complex b) {
+    return pow((pow(a.real, 2) + pow(a.imaginary, 2)), 0.5) <= pow((pow(b.real, 2) + pow(b.imaginary, 2)), 0.5);
+}
+
+bool operator<=(Complex a, int b) {
+    return pow((pow(a.real, 2) + pow(a.imaginary, 2)), 0.5) <= b;
+}
+
+bool operator<=(int a, Complex b) {
+    return a <= pow((pow(b.real, 2) + pow(b.imaginary, 2)), 0.5);
+}
 
 int main() {
     Complex c1(2, 3);
@@ -194,6 +215,14 @@ int main() {
     c1.Print();cout << " !=   " << num << "  -> " << ((c1 != num) ? "True" : "False") << endl;
     cout << num << "    != "; c2.Print();cout << " -> " << ((num != c2) ? "True" : "False") << endl << endl;
 
-    
+    // > operator
+    c1.Print();cout << " > "; c2.Print();cout << " -> " << ((c1 > c2) ? "True" : "False") << endl;
+    c1.Print();cout << " >   " << num << "  -> " << ((c1 > num) ? "True" : "False") << endl;
+    cout << num << "    > "; c2.Print();cout << " -> " << ((num > c2) ? "True" : "False") << endl << endl;
+
+    // <= operator
+    c1.Print();cout << " <= "; c2.Print();cout << " -> " << ((c1 <= c2) ? "True" : "False") << endl;
+    c1.Print();cout << " <=   " << num << "  -> " << ((c1 <= num) ? "True" : "False") << endl;
+    cout << num << "    <= "; c2.Print();cout << " -> " << ((num <= c2) ? "True" : "False") << endl << endl;
 
 }

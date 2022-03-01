@@ -140,34 +140,30 @@ UnsortedType::~UnsortedType() {
 }
 
 int main() {
-    UnsortedType list;
+     UnsortedType list;
 
-    ItemType i1(5);
-    list.PutItem(i1);
-    list.PutItem(ItemType(10));
-    list.PutItem(ItemType(15));
-    list.PutItem(ItemType(20));
-    list.PutItem(ItemType(22));
-    list.PutItem(ItemType(23));
-    list.PutItem(ItemType(24));
-    list.PutItem(ItemType(25));
+    for (int i = 0; i < 20; i++)
+    {
+        list.PutItem(ItemType(i));
+    }
 
-    for (int i = 0; i < 5; i++)
+    list.ResetList();
+    for (int i = 0; i < list.GetLength(); i++)
     {
         list.GetNextItem().Print();
     }
-    list.ResetList();
 
-    list.DeleteItem(ItemType(25));
-    list.DeleteItem(ItemType(15));
-    // list.DeleteItem(ItemType(15));
+    for (int i = 0; i < 20; i += 2)
+    {
+        list.DeleteItem(ItemType(i));
+    }
 
     cout << endl;
+    list.ResetList();
     for (int i = 0; i < list.GetLength(); i++)
     {
         list.GetNextItem().Print();
     }
     list.ResetList();
-
     return 0;
 }

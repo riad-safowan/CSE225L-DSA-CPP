@@ -2,10 +2,11 @@
 #include "item_type.cpp"
 using namespace std;
 
-const int MAX_ITEM = 50;
+const int MAX_ITEM = 100;
 
 class SortedType {
 public:
+    SortedType();
     void MakeEmpty();
     bool IsFull() const;
     int GetLength() const;
@@ -16,10 +17,15 @@ public:
     ItemType GetNextItem();
 
 private:
-    int length = 0;
+    int length;
     ItemType info[MAX_ITEM];
-    int currentPos = -1;
+    int currentPos;
 };
+
+SortedType::SortedType() {
+    length = 0;
+    currentPos = -1;
+}
 
 void SortedType::MakeEmpty() {
     length = 0;

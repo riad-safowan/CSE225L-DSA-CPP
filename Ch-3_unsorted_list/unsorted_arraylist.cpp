@@ -2,11 +2,12 @@
 #include "item_type.cpp"
 using namespace std;
 
-const int MAX_ITEM = 5;
+const int MAX_ITEM = 100;
 
 class UnsortedType {
 
 public:
+    UnsortedType();
     void MakeEmpty();
     bool IsFull() const;
     int GetLength() const;
@@ -17,10 +18,15 @@ public:
     ItemType GetNextItem();
 
 private:
-    int length = 0;
+    int length;
     ItemType info[MAX_ITEM];
-    int currentPos = -1;
+    int currentPos;
 };
+
+UnsortedType::UnsortedType() {
+    length = 0;
+    currentPos = -1;
+}
 
 void UnsortedType::MakeEmpty() {
     length = 0;
