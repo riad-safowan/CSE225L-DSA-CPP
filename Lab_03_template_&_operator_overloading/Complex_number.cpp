@@ -25,6 +25,9 @@ class Complex {
     friend bool operator!=(int, Complex);
     friend bool operator!=(Complex, int);
 
+    /*as complex numbers are not directly comparable
+    here we are comparing based on their modulus.
+    */
     friend bool operator>(Complex, Complex);
     friend bool operator>(int, Complex);
     friend bool operator>(Complex, int);
@@ -176,9 +179,14 @@ bool operator<=(int a, Complex b) {
 }
 
 int main() {
-    Complex c1(2, 3);
-    Complex c2(4, 5);
-    int num = 8;
+    int x1, y1, x2, y2, num;
+    cin >> x1;
+    cin >> x2;
+    cin >> y1;
+    cin >> y2;
+    cin >> num;
+    Complex c1(x1, y1);
+    Complex c2(x2, y2);
     Complex result;
 
     // + operator
