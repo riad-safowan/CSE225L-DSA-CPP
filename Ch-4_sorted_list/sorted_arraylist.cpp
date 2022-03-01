@@ -2,7 +2,7 @@
 #include "item_type.cpp"
 using namespace std;
 
-const int MAX_ITEM = 5;
+const int MAX_ITEM = 50;
 
 class UnsortedType {
 public:
@@ -18,7 +18,7 @@ public:
 private:
     int length = 0;
     ItemType info[MAX_ITEM];
-    int currentPos = 0;
+    int currentPos = -1;
 };
 
 void UnsortedType::MakeEmpty() {
@@ -44,11 +44,11 @@ ItemType UnsortedType::GetItem(ItemType item, bool& found)
         switch (item.ComparedTo(info[location])) {
         case LESS:
             high = location;
-            location = (high - low) / 2;
+            location = (high + low) / 2;
             break;
         case GREATER:
             low = location;
-            location = (high - low) / 2;
+            location = (high + low) / 2;
             break;
         case EQUAL: found = true;
             item = info[location];
@@ -60,7 +60,7 @@ ItemType UnsortedType::GetItem(ItemType item, bool& found)
 
 void UnsortedType::PutItem(ItemType item)
 {
-    item.Print();
+
     if (length == 0)
     {
         info[0] = item;
@@ -75,13 +75,13 @@ void UnsortedType::PutItem(ItemType item)
         switch (item.ComparedTo(info[location])) {
         case LESS:
             high = location - 1;
-            location = (high - low) / 2;
+            location = (high + low) / 2;
             if (low > high)
                 location--;
             break;
         case GREATER:
             low = location + 1;
-            location = (high - low) / 2;
+            location = (high + low) / 2;
             if (low > high)
                 location++;
             break;
@@ -91,12 +91,12 @@ void UnsortedType::PutItem(ItemType item)
     }
     for (int i = length; i >= location; i--)
     {
-        std::cout<<"Iteration: "<<i<<endl;
         info[i + 1] = info[i];
     }
-    
+
     info[location] = item;
     length++;
+
 }
 
 void UnsortedType::DeleteItem(ItemType item)
@@ -108,11 +108,11 @@ void UnsortedType::DeleteItem(ItemType item)
         switch (item.ComparedTo(info[location])) {
         case LESS:
             high = location;
-            location = (high - low) / 2;
+            location = (high + low) / 2;
             break;
         case GREATER:
             low = location;
-            location = (high - low) / 2;
+            location = (high + low) / 2;
             break;
         case EQUAL: found = true;
             break;
@@ -120,7 +120,7 @@ void UnsortedType::DeleteItem(ItemType item)
     }
     if (found)
     {
-        for (int i = location; i < length - 1; i++)
+        for (int i = location; i <= length - 1; i++)
         {
             info[i] = info[i + 1];
         }
@@ -149,22 +149,23 @@ int main() {
     list.PutItem(ItemType(15));
     list.PutItem(ItemType(20));
     list.PutItem(ItemType(25));
+    list.PutItem(ItemType(12));
+    list.PutItem(ItemType(10));
 
-    for (int i = 0; i < 5; i++)
+    cout << "The array: ";
+    for (int i = 0; i < list.GetLength(); i++)
     {
         list.GetNextItem().Print();
     }
     list.ResetList();
 
     list.DeleteItem(ItemType(10));
-    list.PutItem(ItemType(8888));
 
-    cout << endl;
-    for (int i = 0; i < 5; i++)
+    cout << endl << "The array: ";
+    for (int i = 0; i < list.GetLength(); i++)
     {
         list.GetNextItem().Print();
     }
-    list.ResetList();
 
     return 0;
 }
