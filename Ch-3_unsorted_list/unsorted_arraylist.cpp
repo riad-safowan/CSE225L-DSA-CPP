@@ -70,12 +70,13 @@ void UnsortedType::PutItem(ItemType item)
 
 void UnsortedType::DeleteItem(ItemType item)
 {
-    int location = 0;
-    while (item.ComparedTo(info[location]) != EQUAL)
-        location++;
-    if (item.ComparedTo(info[location]) == EQUAL) {
-        info[location] = info[length - 1];
-        length--;
+    for (int i = 0; i < length; i++)
+    {
+        if (item.ComparedTo(info[i]) == EQUAL) {
+            info[i] = info[length - 1];
+            length--;
+            break;
+        }
     }
 }
 
@@ -99,6 +100,9 @@ int main() {
         list.PutItem(ItemType(i));
     }
 
+    list.PutItem(ItemType(100));
+    list.PutItem(ItemType(101));
+
     list.ResetList();
     for (int i = 0; i < list.GetLength(); i++)
     {
@@ -109,6 +113,12 @@ int main() {
     {
         list.DeleteItem(ItemType(i));
     }
+
+    list.DeleteItem(ItemType(100));
+    list.DeleteItem(ItemType(102));
+    list.DeleteItem(ItemType(102));
+    list.DeleteItem(ItemType(102));
+    list.DeleteItem(ItemType(20));
 
     cout << endl;
     list.ResetList();

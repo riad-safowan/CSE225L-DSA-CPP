@@ -95,22 +95,30 @@ void UnsortedType::PutItem(ItemType item) {
 void UnsortedType::DeleteItem(ItemType item) {
     NodeType* location = listData;
     NodeType* previous;
-    if (item.ComparedTo(location->info) == EQUAL)
+    if (item.ComparedTo(listData->info) == EQUAL)
     {
         listData = location->next;
         delete location;
         length--;
     }
     else {
-        while (item.ComparedTo(location->info) != EQUAL)
+        while (location->next != NULL)
         {
+            if (item.ComparedTo(location->info) == EQUAL)
+            {
+                previous->next = location->next;
+                delete location;
+                length--;
+                return;
+            }
             previous = location;
             location = location->next;
         }
-        previous->next = location->next;
-
-        delete location;
-        length--;
+        if (item.ComparedTo(location->info) == EQUAL)
+        {
+            previous->next = NULL;
+            delete location;
+        }
     }
 }
 
@@ -140,12 +148,15 @@ UnsortedType::~UnsortedType() {
 }
 
 int main() {
-     UnsortedType list;
+    UnsortedType list;
 
     for (int i = 0; i < 20; i++)
     {
         list.PutItem(ItemType(i));
     }
+
+    list.PutItem(ItemType(100));
+    list.PutItem(ItemType(101));
 
     list.ResetList();
     for (int i = 0; i < list.GetLength(); i++)
@@ -158,6 +169,11 @@ int main() {
         list.DeleteItem(ItemType(i));
     }
 
+    list.DeleteItem(ItemType(100));
+    list.DeleteItem(ItemType(102));
+    list.DeleteItem(ItemType(102));
+    list.DeleteItem(ItemType(102));
+    list.DeleteItem(ItemType(20));
     cout << endl;
     list.ResetList();
     for (int i = 0; i < list.GetLength(); i++)

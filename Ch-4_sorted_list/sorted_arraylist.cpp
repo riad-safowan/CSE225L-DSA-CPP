@@ -108,16 +108,16 @@ void SortedType::PutItem(ItemType item)
 void SortedType::DeleteItem(ItemType item)
 {
     int low = 0, high = length - 1;
-    int location = (length - 1) / 2;
+    int location = low + high / 2;
     bool found = false;
-    while (!found) {
+    while (!found & low <= high) {
         switch (item.ComparedTo(info[location])) {
         case LESS:
-            high = location;
+            high = location - 1;
             location = (high + low) / 2;
             break;
         case GREATER:
-            low = location;
+            low = location + 1;
             location = (high + low) / 2;
             break;
         case EQUAL: found = true;
@@ -126,9 +126,11 @@ void SortedType::DeleteItem(ItemType item)
     }
     if (found)
     {
-        for (int i = location; i <= length - 1; i++)
-        {
-            info[i] = info[i + 1];
+        if (location != length - 1) {
+            for (int i = location; i <= length - 1; i++)
+            {
+                info[i] = info[i + 1];
+            }
         }
         length--;
     }
@@ -153,7 +155,8 @@ int main() {
     {
         list.PutItem(ItemType(i));
     }
-
+    list.PutItem(ItemType(100));
+    list.PutItem(ItemType(101));
     list.ResetList();
     for (int i = 0; i < list.GetLength(); i++)
     {
@@ -164,6 +167,9 @@ int main() {
     {
         list.DeleteItem(ItemType(i));
     }
+
+    list.DeleteItem(ItemType(100));
+    list.DeleteItem(ItemType(101));
 
     cout << endl;
     list.ResetList();
