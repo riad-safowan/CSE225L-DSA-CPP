@@ -66,7 +66,6 @@ ItemType SortedType::GetItem(ItemType item, bool& found)
 
 void SortedType::PutItem(ItemType item)
 {
-
     if (length == 0)
     {
         info[0] = item;
@@ -99,10 +98,8 @@ void SortedType::PutItem(ItemType item)
     {
         info[i + 1] = info[i];
     }
-
     info[location] = item;
     length++;
-
 }
 
 void SortedType::DeleteItem(ItemType item)
@@ -153,8 +150,9 @@ int main() {
 
     for (int i = 0; i < 20; i++)
     {
-        list.PutItem(ItemType(i));
+        list.PutItem(ItemType(i+1));
     }
+    list.PutItem(0);
     list.PutItem(ItemType(100));
     list.PutItem(ItemType(101));
     list.ResetList();

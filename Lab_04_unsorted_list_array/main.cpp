@@ -45,7 +45,7 @@ int main() {
     list.InsertItem(6);
     list.InsertItem(9);
 
-    for (int i = 0; i < list.LengthIs(); i++)
+    for (int i = 0; i < list.LengthIs(); i++) 
     {
         int x; list.GetNextItem(x);
         cout << x << " ";
