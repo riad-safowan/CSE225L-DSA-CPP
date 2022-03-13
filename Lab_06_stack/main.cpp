@@ -29,6 +29,22 @@ bool isBalanced(string parenthesis) {
                 return false;
             stack.Pop();
         }
+        if (parenthesis.at(i) == '{') {
+            stack.Push(parenthesis.at(i));
+        }
+        else if (parenthesis.at(i) == '}') {
+            if (stack.IsEmpty() && stack.Top() != '{')
+                return false;
+            stack.Pop();
+        }
+        if (parenthesis.at(i) == '[') {
+            stack.Push(parenthesis.at(i));
+        }
+        else if (parenthesis.at(i) == ']') {
+            if (stack.IsEmpty() && stack.Top() != '[')
+                return false;
+            stack.Pop();
+        }
     }
     return stack.IsEmpty();
 }
@@ -58,5 +74,10 @@ int main() {
     cout << (isBalanced("(())()(()())()") ? "Balanced" : "Not Balanced") << endl;
     cout << (isBalanced("(())()((()") ? "Balanced" : "Not Balanced") << endl;
     cout << (isBalanced("(())))((() ") ? "Balanced" : "Not Balanced") << endl;
+    cout << endl;
+    cout << (isBalanced("}{") ? "Balanced" : "Not Balanced") << endl;
+    cout << (isBalanced("{}") ? "Balanced" : "Not Balanced") << endl;
+    cout << (isBalanced("()]") ? "Balanced" : "Not Balanced") << endl;
+    cout << (isBalanced("{(({{}}))}[(())]({{}})") ? "Balanced" : "Not Balanced") << endl;
     return 0;
 }
