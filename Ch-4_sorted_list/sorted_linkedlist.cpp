@@ -178,6 +178,16 @@ SortedType::~SortedType() {
     }
 }
 
+void printList(SortedType list) {
+    for (int i = 0; i < list.GetLength(); i++)
+    {
+        list.GetNextItem().Print();
+    }
+    cout << endl;
+    list.ResetList();
+}
+
+
 int main() {
     SortedType list;
 
@@ -189,29 +199,20 @@ int main() {
     list.PutItem(ItemType(100));
     list.PutItem(ItemType(101));
 
-    list.ResetList();
-    for (int i = 0; i < list.GetLength(); i++)
-    {
-        list.GetNextItem().Print();
-    }
+    printList(list);
 
     for (int i = 0; i < 20; i += 2)
     {
         list.DeleteItem(ItemType(i));
     }
 
-    list.DeleteItem(ItemType(100));
-    list.DeleteItem(ItemType(102));
-    list.DeleteItem(ItemType(102));
-    list.DeleteItem(ItemType(102));
-    list.DeleteItem(ItemType(20));
-    cout << endl;
-    list.ResetList();
-    for (int i = 0; i < list.GetLength(); i++)
-    {
-        list.GetNextItem().Print();
-    }
-    list.ResetList();
+    // list.DeleteItem(ItemType(100));
+    // list.DeleteItem(ItemType(102));
+    // list.DeleteItem(ItemType(102));
+    // list.DeleteItem(ItemType(102));
+    // list.DeleteItem(ItemType(20));
+
+    // printList(list);
 
     return 0;
 }

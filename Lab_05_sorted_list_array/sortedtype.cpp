@@ -84,28 +84,6 @@ void SortedType<ItemType>::InsertItem(ItemType item)
         return;
     }
 
-    // int low = 0, high = length - 1;
-    // int location = (high + low) / 2;
-    // bool found = false;
-
-    // while (!found && low <= high) {
-    //     if (item < info[location]) {
-    //         high = location - 1;
-    //         location = (high + low) / 2;
-    //         if (low > high)
-    //             location--;
-    //     }
-    //     else if (item > info[location]) {
-    //         low = location + 1;
-    //         location = (high + low) / 2;
-    //         if (low > high)
-    //             location++;
-    //     }
-    //     else if (item == info[location]) {
-    //         found = true;
-    //     }
-    // }
-
     int location = 0;
     bool moreToSearch = (location < length);
     while (moreToSearch)
@@ -119,7 +97,6 @@ void SortedType<ItemType>::InsertItem(ItemType item)
             moreToSearch = false;
     }
 
-
     for (int i = length; i > location; i--)
     {
         info[i] = info[i - 1];
@@ -131,33 +108,6 @@ template <class ItemType>
 void SortedType<ItemType>::DeleteItem(ItemType
     item)
 {
-    // int low = 0, high = length - 1;
-    // int location;
-    // bool found = false;
-
-    // while (!found && high >= low) {
-    //     location = (high + low) / 2;
-    //     if (item < info[location]) {
-    //         high = location;
-    //     }
-    //     else if (item > info[location]) {
-    //         low = location;
-    //     }
-    //     else if (item == info[location]) {
-    //         found = true;
-    //     }
-    // }
-    // if (found)
-    // {
-    //     if (location != length - 1) {
-    //         for (int i = location; i <= length - 1; i++)
-    //         {
-    //             info[i] = info[i + 1];
-    //         }
-    //     }
-    //     length--;
-    // }
-
     int location = 0;
     while (item != info[location])
         location++;
