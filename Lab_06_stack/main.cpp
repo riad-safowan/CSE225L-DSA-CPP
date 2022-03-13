@@ -17,6 +17,22 @@ void printStack(StackType<int> stack) {
     cout << endl;
 }
 
+bool isBalanced(string parenthesis) {
+    StackType<char> stack;
+    for (int i = 0; i < parenthesis.length(); i++)
+    {
+        if (parenthesis.at(i) == '(') {
+            stack.Push(parenthesis.at(i));
+        }
+        else if (parenthesis.at(i) == ')') {
+            if (stack.IsEmpty())
+                return false;
+            stack.Pop();
+        }
+    }
+    return stack.IsEmpty();
+}
+
 int main() {
     StackType<int> stack;
     cout << (stack.IsEmpty() ? "Stack is empty" : "Stack is not empty") << endl;
@@ -36,7 +52,11 @@ int main() {
     stack.Pop();
     stack.Pop();
 
-    cout << stack.Top();
-    
+    cout << stack.Top() << endl;
+
+    cout << (isBalanced("()") ? "Balanced" : "Not Balanced") << endl;
+    cout << (isBalanced("(())()(()())()") ? "Balanced" : "Not Balanced") << endl;
+    cout << (isBalanced("(())()((()") ? "Balanced" : "Not Balanced") << endl;
+    cout << (isBalanced("(())))((() ") ? "Balanced" : "Not Balanced") << endl;
     return 0;
 }
