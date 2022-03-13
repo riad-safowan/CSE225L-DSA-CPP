@@ -11,6 +11,14 @@
         "utility": "cpp",
         "ostream": "cpp",
         "cstdlib": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "*.tcc": "cpp",
+        "cwchar": "cpp",
+        "type_traits": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "new": "cpp",
+        "stdexcept": "cpp",
+        "system_error": "cpp"
     }
 }

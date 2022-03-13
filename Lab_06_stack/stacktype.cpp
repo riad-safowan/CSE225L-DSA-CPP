@@ -49,6 +49,11 @@ void StackType<ItemType>::Pop()
 template <class ItemType>
 ItemType StackType<ItemType>::Top()
 {
-    if (IsEmpty()) throw EmptyStack();
-    return items[top];
+    try {
+        if (IsEmpty()) throw EmptyStack();
+        return items[top];
+    }
+    catch (EmptyStack e) {
+        cout << "Stack is Empty" << endl;
+    }
 }
