@@ -75,28 +75,28 @@ void SortedType::PutItem(ItemType item)
 
     int low = 0, high = length - 1;
     int location = (length - 1) / 2;
-    bool found = false;
-    while (!found && low <= high) {
+    bool done = false;
+    while (!done && low <= high) {
         switch (item.ComparedTo(info[location])) {
         case LESS:
             high = location - 1;
             location = (high + low) / 2;
-            if (low > high)
-                location--;
             break;
         case GREATER:
             low = location + 1;
             location = (high + low) / 2;
-            if (low > high)
+            if (low == high && item.ComparedTo(info[location]) == LESS)
+                done = true;
+            else if (low > high)
                 location++;
             break;
-        case EQUAL: found = true;
+        case EQUAL: done = true;
             break;
         }
     }
-    for (int i = length; i >= location; i--)
+    for (int i = length; i > location; i--)
     {
-        info[i + 1] = info[i];
+        info[i] = info[i - 1];
     }
     info[location] = item;
     length++;
@@ -144,22 +144,28 @@ ItemType SortedType::GetNextItem()
     return info[currentPos];
 }
 
+void printList(SortedType list) {
+    for (int i = 0; i < list.GetLength(); i++)
+    {
+        list.GetNextItem().Print();
+    }
+    cout << endl;
+    list.ResetList();
+}
+
 
 int main() {
     SortedType list;
 
     for (int i = 0; i < 20; i++)
     {
-        list.PutItem(ItemType(i+1));
+        list.PutItem(ItemType(i + 1));
     }
     list.PutItem(0);
     list.PutItem(ItemType(100));
     list.PutItem(ItemType(101));
-    list.ResetList();
-    for (int i = 0; i < list.GetLength(); i++)
-    {
-        list.GetNextItem().Print();
-    }
+
+    printList(list);
 
     for (int i = 0; i < 20; i += 2)
     {
@@ -169,13 +175,7 @@ int main() {
     list.DeleteItem(ItemType(100));
     list.DeleteItem(ItemType(101));
 
-    cout << endl;
-    list.ResetList();
-    for (int i = 0; i < list.GetLength(); i++)
-    {
-        list.GetNextItem().Print();
-    }
-    list.ResetList();
+    printList(list);
 
     return 0;
 }
