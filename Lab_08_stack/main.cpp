@@ -73,7 +73,7 @@ int main() {
     cout << (isBalanced("()") ? "Balanced" : "Not Balanced") << endl;
     cout << (isBalanced("(())()(()())()") ? "Balanced" : "Not Balanced") << endl;
     cout << (isBalanced("(())()((()") ? "Balanced" : "Not Balanced") << endl;
-    cout << (isBalanced("(())))((() ") ? "Balanced" : "Not Balanced") << endl;
+    cout << (isBalanced("(())))((()") ? "Balanced" : "Not Balanced") << endl;
     cout << endl;
     cout << (isBalanced("}{") ? "Balanced" : "Not Balanced") << endl;
     cout << (isBalanced("{}") ? "Balanced" : "Not Balanced") << endl;
