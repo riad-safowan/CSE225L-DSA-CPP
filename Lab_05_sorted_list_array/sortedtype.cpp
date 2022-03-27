@@ -34,23 +34,6 @@ void SortedType<ItemType>::GetNextItem(ItemType& item)
 template <class ItemType>
 void SortedType<ItemType>::RetrieveItem(ItemType& item, bool& found)
 {
-    // int low = 0, high = length - 1;
-    // int location;
-    // found = false;
-    // while (!found && high >= low) {
-    //     location = (high + low) / 2;
-    //     if (item < info[location]) {
-    //         high = location;
-    //     }
-    //     else if (item > info[location]) {
-    //         low = location;
-    //     }
-    //     else if (item == info[location]) {
-    //         found = true;
-    //         item = info[location];
-    //     }
-    // }
-
     int midPoint, first = 0, last = length - 1;
     bool moreToSearch = (first <= last);
     found = false;
