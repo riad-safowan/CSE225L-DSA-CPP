@@ -45,7 +45,7 @@ public:
 
 
 void printList(SortedType<int> list) {
-    for (int i = 0; i < list.LengthIs(); i++)
+    for (int i = 0; i < list.GetLength(); i++)
     {
         int item;
         list.GetNextItem(item);
@@ -56,7 +56,7 @@ void printList(SortedType<int> list) {
 }
 
 void printList(SortedType<TimeStamp> list) {
-    for (int i = 0; i < list.LengthIs(); i++)
+    for (int i = 0; i < list.GetLength(); i++)
     {
         TimeStamp item;
         list.GetNextItem(item);
@@ -71,7 +71,7 @@ int main() {
 
     SortedType<int> list;
 
-    cout << list.LengthIs() << endl;
+    cout << list.GetLength() << endl;
 
     list.InsertItem(5);
     list.InsertItem(7);

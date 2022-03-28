@@ -16,7 +16,7 @@ bool SortedType<ItemType>::IsFull()
     return (length == MAX_ITEMS);
 }
 template <class ItemType>
-int SortedType<ItemType>::LengthIs()
+int SortedType<ItemType>::GetLength()
 {
     return length;
 }
@@ -60,24 +60,13 @@ void SortedType<ItemType>::RetrieveItem(ItemType& item, bool& found)
 template <class ItemType>
 void SortedType<ItemType>::InsertItem(ItemType item)
 {
-    if (length == 0)
-    {
-        info[0] = item;
-        length++;
-        return;
-    }
-
     int location = 0;
-    bool moreToSearch = (location < length);
-    while (moreToSearch)
+    for(int i=0; i<length; i++)
     {
-        if (item > info[location])
-        {
+        if(item>info[i])
             location++;
-            moreToSearch = (location < length);
-        }
-        else if (item < info[location])
-            moreToSearch = false;
+        else
+            break;
     }
 
     for (int i = length; i > location; i--)
@@ -91,13 +80,17 @@ template <class ItemType>
 void SortedType<ItemType>::DeleteItem(ItemType
     item)
 {
-    int location = 0;
-    while (item != info[location])
-        location++;
+    int location=0;
+    for(int i=0; i<length; i++)
+    {
+        if(info[i] == item)
+            break;
+        else
+            location++;
+    }
     for (int index = location + 1; index < length;
         index++)
         info[index - 1] = info[index];
     length--;
-
 }
 

@@ -1,22 +1,22 @@
 #ifndef SORTEDTYPE_H_INCLUDED
 #define SORTEDTYPE_H_INCLUDED
 const int MAX_ITEMS = 5;
-template <class ItemType>
+template <class T>
 class SortedType
 {
 public:
     SortedType();
     void MakeEmpty();
     bool IsFull();
-    int LengthIs();
-    void InsertItem(ItemType);
-    void DeleteItem(ItemType);
-    void RetrieveItem(ItemType&, bool&);
+    int GetLength();
+    void InsertItem(T);
+    void DeleteItem(T);
+    void RetrieveItem(T&, bool&);
     void ResetList();
-    void GetNextItem(ItemType&);
+    void GetNextItem(T&);
 private:
     int length;
-    ItemType info[MAX_ITEMS];
+    T info[MAX_ITEMS];
     int currentPos;
 };
 #endif

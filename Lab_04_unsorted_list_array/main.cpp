@@ -1,5 +1,5 @@
 #include<iostream>
-#include "unsortedtype.cpp"
+#include "unsortedList.cpp"
 using namespace std;
 
 class StudentInfo
@@ -38,14 +38,14 @@ public:
 
 
 int main() {
-    UnsortedType<int> list;
+    UnsortedList<int> list;
 
     list.InsertItem(5);
     list.InsertItem(7);
     list.InsertItem(6);
     list.InsertItem(9);
 
-    for (int i = 0; i < list.LengthIs(); i++) 
+    for (int i = 0; i < list.GetLength(); i++) 
     {
         int x; list.GetNextItem(x);
         cout << x << " ";
@@ -53,11 +53,11 @@ int main() {
     cout << endl;
     list.ResetList();
 
-    cout << "length of the list is : " << list.LengthIs() << endl;
+    cout << "length of the list is : " << list.GetLength() << endl;
 
     list.InsertItem(1);
 
-    for (int i = 0; i < list.LengthIs(); i++)
+    for (int i = 0; i < list.GetLength(); i++)
     {
         int x; list.GetNextItem(x);
         cout << x << " ";
@@ -88,7 +88,7 @@ int main() {
 
     list.DeleteItem(1);
 
-    for (int i = 0; i < list.LengthIs(); i++)
+    for (int i = 0; i < list.GetLength(); i++)
     {
         int x; list.GetNextItem(x);
         cout << x << " ";
@@ -98,7 +98,7 @@ int main() {
 
     list.DeleteItem(6);
 
-    for (int i = 0; i < list.LengthIs(); i++)
+    for (int i = 0; i < list.GetLength(); i++)
     {
         int x; list.GetNextItem(x);
         cout << x << " ";
@@ -106,7 +106,7 @@ int main() {
     cout << endl;
     list.ResetList();
 
-    UnsortedType<StudentInfo> students;
+    UnsortedList<StudentInfo> students;
     students.InsertItem(StudentInfo(15234, "Jon", 2.6));
     students.InsertItem(StudentInfo(13732, "Tyrion", 3.9));
     students.InsertItem(StudentInfo(13569, "Sandor", 1.2));
@@ -129,7 +129,7 @@ int main() {
     }
 
 
-    for (int i = 0; i < students.LengthIs(); i++)
+    for (int i = 0; i < students.GetLength(); i++)
     {
         StudentInfo x; students.GetNextItem(x);
         x.print();
