@@ -110,7 +110,6 @@ int main() {
     timeList.InsertItem(TimeStamp(43, 45, 12));
     timeList.InsertItem(TimeStamp(25, 36, 17));
     timeList.InsertItem(TimeStamp(52, 02, 20));
-
     timeList.DeleteItem(TimeStamp(25, 36, 17));
 
     printList(timeList);

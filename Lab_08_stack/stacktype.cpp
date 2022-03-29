@@ -54,6 +54,6 @@ ItemType StackType<ItemType>::Top()
         return items[top];
     }
     catch (EmptyStack e) {
-        cout << "Stack is Empty" << endl;
+        cout << "Stack is Empty" << endl;  
     }
 }
