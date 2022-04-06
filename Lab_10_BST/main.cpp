@@ -1,10 +1,13 @@
 #include<iostream>
+#include<queue>
 using namespace std;
 int const MAX_SIZE = 10;
 
 int graph[MAX_SIZE][MAX_SIZE] = { 0 };
 int node, edge;
 bool visited[MAX_SIZE];
+
+int level[MAX_SIZE];
 
 void Initialize() {
     for (int i = 0; i < node; i++)
@@ -20,11 +23,32 @@ void AdjacentNode(int source) {
 
 void DFS(int source) {
     visited[source] = true;
-    cout << source << " ";
+
     for (int i = 0; i < node; i++) {
         if (graph[source][i] == 1) {
             if (visited[i] == false) {
                 DFS(i);
+            }
+        }
+    }
+    cout << source << " ";
+}
+
+void BFS(int source) {
+    queue<int> q;                                                                              
+    visited[source] = true;
+    q.push(source);
+    while (!q.empty()) {
+        int x = q.front();
+        cout << x << " ";
+        q.pop();
+        for (int i = 0; i < node; i++) {
+            if (graph[x][i] == 1) {
+                if (visited[i] == false) {
+                    q.push(i);
+                    visited[i] = true;
+                    level[i] = level[x] + 1;
+                }
             }
         }
     }
@@ -49,19 +73,20 @@ int main() {
     AdjacentNode(3);
     cout << endl;
     Initialize();
-    DFS(0);
+    BFS(0);
     return 0;
 }
 
 /*
-8 9
+7 10
 0 1
-0 3
+0 2
+2 5
+1 5
 1 3
-2 3
-2 4
-3 5
-4 5
+3 4
+5 4
+4 6
 3 6
-6 7
+5 6
 */
