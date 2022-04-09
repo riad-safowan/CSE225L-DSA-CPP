@@ -23,7 +23,6 @@ void AdjacentNode(int source) {
 
 void DFS(int source) {
     visited[source] = true;
-
     for (int i = 0; i < node; i++) {
         if (graph[source][i] == 1) {
             if (visited[i] == false) {
@@ -35,13 +34,12 @@ void DFS(int source) {
 }
 
 void BFS(int source) {
-    queue<int> q;                                                                              
-    visited[source] = true;
+    queue<int> q;
     q.push(source);
+    visited[source] = true;
     while (!q.empty()) {
         int x = q.front();
         cout << x << " ";
-        q.pop();
         for (int i = 0; i < node; i++) {
             if (graph[x][i] == 1) {
                 if (visited[i] == false) {
@@ -51,6 +49,7 @@ void BFS(int source) {
                 }
             }
         }
+        q.pop();
     }
 }
 
