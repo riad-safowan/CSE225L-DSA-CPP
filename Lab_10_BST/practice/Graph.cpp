@@ -8,12 +8,14 @@ int graph[MAX_SIZE][MAX_SIZE];
 int node, edge;
 bool visited[MAX_SIZE];
 int level[MAX_SIZE];
+int previous[MAX_SIZE];
 
 
-void resetVisited() {
+void Initialize() {
     for (int i = 0; i < MAX_SIZE; i++)
     {
         visited[i] = false;
+        level[i] = 0;
     }
 }
 
@@ -41,7 +43,7 @@ void adjacentNode(int nd) {
     {
         if (graph[nd][i] == 1)
             cout << i << " ";
-    }cout << endl;
+    }
 }
 
 void DFS(int start) {
@@ -59,6 +61,7 @@ void DFS(int start) {
 }
 
 void BFS(int start) {
+    Initialize();
     queue<int> q;
     q.push(start);
     visited[start] = true;
@@ -86,28 +89,73 @@ void printLevel() {
     }
 }
 
-void sortestPath(int start, int end) {
-    for (int i = 0; i < level[end]; i++)
+void printShortestPath(int start, int end) {
+    if (end == start)
     {
-        if (graph[start][i] == 1);
+        cout << endl << end;
+        return;
     }
+
+    printShortestPath(start, previous[end]);
+    cout << " -> " << end;
 }
+
+void shortestPath(int start, int end) {
+    bool done = false;
+    Initialize();
+
+    queue<int> q;
+    q.push(start);
+    visited[start] = true;
+    level[start] = 0;
+
+    while (!q.empty() && !done) {
+        int x = q.front();
+        for (int i = 0; i < node; i++)
+        {
+            if (graph[x][i] == 1 && !visited[i]) {
+                q.push(i);
+                visited[i] = true;
+                level[i] = level[x] + 1;
+                previous[i] = x;
+                done = i == end;
+            }
+            if (done) break;
+        }
+        q.pop();
+    }
+
+    printShortestPath(start, end);
+}
+
 
 
 int main() {
     seedEdges();
-    cout << endl;
+    cout << endl << "The graph: " << endl;
     showGraph();
-    // cout << endl;
-    // adjacentNode(6);
-    // cout << endl;
-    // DFS(0);
-    cout << endl;
-    resetVisited();
+    cout << endl << "All adjacents node of 6: ";
+    adjacentNode(6);
+
+    cout << endl << endl << "DFS: ";
+    DFS(0);
+
+    cout << endl << endl << "BFS: ";
     BFS(0);
-    cout << endl;
-    cout << endl;
+
+    cout << endl << endl << "Levels: ";
     printLevel();
+
+    cout << endl << endl << "All nodes shortest path from 0: ";
+    shortestPath(0, 0);
+    shortestPath(0, 1);
+    shortestPath(0, 2);
+    shortestPath(0, 3);
+    shortestPath(0, 4);
+    shortestPath(0, 5);
+    shortestPath(0, 6);
+    shortestPath(0, 7);
+    shortestPath(0, 8);
 
     return 0;
 }
