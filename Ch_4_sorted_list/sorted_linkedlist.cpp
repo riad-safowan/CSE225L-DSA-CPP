@@ -17,6 +17,7 @@ public:
     int GetLength() const;
     ItemType GetItem(ItemType item, bool& found);
     void PutItem(ItemType item);
+    void Insert(ItemType item);
     void DeleteItem(ItemType item);
     void ResetList();
     ItemType GetNextItem();
@@ -100,6 +101,8 @@ void SortedType::PutItem(ItemType item) {
 
     bool moreToSearch = (location != NULL);
 
+// 0 1 3 5 7 10
+// 7 10
     while (moreToSearch) {
         switch (item.ComparedTo(location->info))
         {
@@ -126,9 +129,26 @@ void SortedType::PutItem(ItemType item) {
     length++;
 }
 
+// void SortedType::Insert(ItemType item) {
+
+//     NodeType* temp = new NodeType();
+//     temp->info = item;
+//     temp->next = NULL;
+
+//     NodeType* index = listData;
+
+//     while ((index->next)->info.ComparedTo(temp->info) == LESS)
+//     {
+//         index = index->next;
+//     }
+//     temp->next = index->next;
+//     index->next = temp;
+// }
+
 void SortedType::DeleteItem(ItemType item) {
     NodeType* location = listData;
     NodeType* previous;
+
     if (item.ComparedTo(listData->info) == EQUAL)
     {
         listData = location->next;
@@ -164,8 +184,9 @@ ItemType SortedType::GetNextItem() {
     ItemType item;
     if (currentPos == NULL)
         currentPos = listData;
+    else
+        currentPos = currentPos->next;
     item = currentPos->info;
-    currentPos = currentPos->next;
     return item;
 }
 
@@ -191,28 +212,14 @@ void printList(SortedType list) {
 int main() {
     SortedType list;
 
-    for (int i = 0; i < 20; i++)
-    {
-        list.PutItem(ItemType(i));
-    }
-
-    list.PutItem(ItemType(100));
-    list.PutItem(ItemType(101));
+    list.PutItem(ItemType(5));
+    list.PutItem(ItemType(15));
+    list.PutItem(ItemType(10));
+    cout << list.GetLength() << endl;
+    printList(list);
+    list.DeleteItem(ItemType(10));
+    cout << list.GetLength() << endl;
 
     printList(list);
-
-    for (int i = 0; i < 20; i += 2)
-    {
-        list.DeleteItem(ItemType(i));
-    }
-
-    // list.DeleteItem(ItemType(100));
-    // list.DeleteItem(ItemType(102));
-    // list.DeleteItem(ItemType(102));
-    // list.DeleteItem(ItemType(102));
-    // list.DeleteItem(ItemType(20));
-
-    // printList(list);
-
     return 0;
 }

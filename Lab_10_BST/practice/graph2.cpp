@@ -6,6 +6,40 @@ using namespace std;
 
 int node, edge;
 int graph[MAX_SIZE][MAX_SIZE];
+bool visited[MAX_SIZE];
+int t = 0;
+/*
+0t
+1f
+2f
+3f
+4f
+5f
+6f
+7f
+8f
+*/
+int startTime[MAX_SIZE];
+/*
+0
+1
+2
+3
+4
+5
+6
+7
+8
+*/
+int endTime[MAX_SIZE];
+
+void init() {
+    for (int i = 0; i < MAX_SIZE; i++)
+    {
+        visited[i] = false;
+    }
+
+}
 
 void seedTheGraph() {
     cin >> node >> edge;
@@ -41,29 +75,43 @@ void printAdjacent(int point) {
     cout << endl;
 }
 
+void DFS(int start) {
+    visited[start] = true;
+    startTime[start] = t++;
+    cout << start << " ";
+    for (int i = 0; i < node; i++)
+    {
+        if (graph[start][i] == 1 && visited[i] == false) {
+            DFS(i);
+        }
+    }
+    endTime[start] = t++;
+
+    //  cout << start << " ";
+}
+
 
 int main() {
     seedTheGraph();
     printTheGraph();
-
     printAdjacent(5);
+
+    DFS(0);
+
+    cout << endl;
+    for (int i = 0; i < node; i++)
+    {
+        cout << "(" << startTime[i] << "," << endTime[i] << ")" << endl;
+    }
+
     return 0;
 }
 
 /*
-9 14
+6 5
 0 1
-0 7
-1 7
-1 2
-8 7
-7 6
-2 8
-8 6
+0 2
 2 3
-2 5
-5 6
+2 4
 3 5
-3 4
-4 5
 */

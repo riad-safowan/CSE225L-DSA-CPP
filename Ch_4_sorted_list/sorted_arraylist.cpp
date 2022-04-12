@@ -161,7 +161,7 @@ int main() {
     {
         list.PutItem(ItemType(i + 1));
     }
-    list.PutItem(0);
+    list.PutItem(ItemType(0));
     list.PutItem(ItemType(100));
     list.PutItem(ItemType(101));
 
@@ -176,6 +176,5 @@ int main() {
     list.DeleteItem(ItemType(101));
 
     printList(list);
-
     return 0;
 }
