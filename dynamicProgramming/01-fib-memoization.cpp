@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 
-#define MX 55
+#define MX 555
 
 long long store[MX];
 
@@ -17,6 +17,6 @@ long long fib(long long n) {
 }
 
 int main() {
-    cout << fib(200);
+    cout << fib(500);
     return 0;
 }
