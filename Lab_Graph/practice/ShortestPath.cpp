@@ -128,8 +128,6 @@ void shortestPath(int start, int end) {
     printShortestPath(start, end);
 }
 
-
-
 int main() {
     seedEdges();
     cout << endl << "The graph: " << endl;

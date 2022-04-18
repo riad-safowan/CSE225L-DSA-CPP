@@ -19,5 +19,6 @@ int main() {
     cout << gridTraveler(2, 3) << endl;
     cout << gridTraveler(3, 3) << endl;
     cout << gridTraveler(9, 90) << endl;
+    cout << gridTraveler(500, 500) << endl;
     return 0;
 }

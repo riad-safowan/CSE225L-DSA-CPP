@@ -9,7 +9,6 @@ int fib(int n) {
 }
 
 int main() {
-
-    cout << fib(5);
+    cout << fib(50);
     return 0;
 }
