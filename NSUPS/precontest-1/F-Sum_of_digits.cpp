@@ -4,8 +4,8 @@ int main() {
     int t;
     cin >> t;
     while (t--) {
-        int num;
-        cin >> num;
+        int num;    
+        cin >> num; 
         int sum = 0;
         while (num > 0) {
             sum += num % 10;
