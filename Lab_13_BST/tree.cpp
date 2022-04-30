@@ -106,57 +106,6 @@ bool search(node* root, int key) {
     else return search(root->right, key);
 }
 
-// void deleteNode(node* root, int key) {
-//     if (root != NULL)
-//         if (root->left == NULL && root->right == NULL) return;
-//     //left subtree
-//     if (root->left->data == key) {
-//         //no child
-//         if (root->left->left == NULL && root->left->right == NULL) {
-//             delete root->left;
-//             root->left = NULL;
-//         }
-//         //left child
-//         else if (root->left->left != NULL && root->left->right == NULL) {
-//             node* temp = root->left->left;
-//             delete root->left;
-//             root->left = temp;
-//         }
-//         //right child
-//         else if (root->left->left == NULL && root->left->right != NULL) {
-//             node* temp = root->left->right;
-//             delete root->left;
-//             root->left = temp;
-//         }
-//         //todo both subtree exists
-//     }
-//     //right subtree
-//     else if (root->right->data == key) {
-//         //no child
-//         if (root->right->left == NULL && root->right->right == NULL) {
-//             delete root->right;
-//             root->right = NULL;
-//         }
-//         //left child
-//         else if (root->right->left != NULL && root->right->right == NULL) {
-//             node* temp = root->right->left;
-//             delete root->right;
-//             root->right = temp;
-//         }
-//         //right child
-//         else if (root->right->left == NULL && &root->right->right != NULL) {
-//             node* temp = root->right->right;
-//             delete root->right;
-//             root->right = temp;
-//         }
-//         //todo both subtree exists
-//     }
-//     else if (key < root->data) return deleteNode(root->left, key);
-//     else return deleteNode(root->right, key);
-// }
-// 2 3 5 
-
-
 int bigger(int n1, int n2) {
     if (n1 < n2) return n2;
     else return n1;

@@ -7,7 +7,7 @@ int main() {
     cin >> n;
     while (n--)
     {
-        
+
         // int num;
         // cin >> num;
         // int sum = 0;
