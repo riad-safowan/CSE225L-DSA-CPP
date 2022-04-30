@@ -3,18 +3,15 @@ using namespace std;
 #define MX_LINES 100
 
 int main() {
-    map<string, int> array[MX_LINES];
-    set<string> words;
-    int line = 0;
-
     ifstream input;
     input.open("input.txt");
-    ofstream output;
-    output.open("output.csv");
-
     if (input)
     {
+        map<string, int> array[MX_LINES];
+        set<string> words;
+        int line = 0;
         string word;
+
         while (input.good()) {
             input >> word;
             for (auto& ch : word)
@@ -23,14 +20,16 @@ int main() {
             int last_i = word.length() - 1;
             if (word[last_i] == '.') {
                 word.erase(last_i);
-                line++;
+                array[line++][word]++; words.insert(word);
+                continue;
             }
-            else if (word[last_i] == ',')
+            if (word[last_i] == ',')
                 word.erase(last_i);
-                
-            array[line][word]++;
-            words.insert(word);
+            array[line][word]++; words.insert(word);
         }
+
+        ofstream output;
+        output.open("output.csv");
 
         output << "line\\word,";
         for (auto word : words)
