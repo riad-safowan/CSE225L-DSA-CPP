@@ -17,18 +17,17 @@ int main() {
         string word;
         while (input.good()) {
             input >> word;
-            for (int i = 0; i < word.length(); i++)
-                word[i] = tolower(word[i]);
+            for (auto& ch : word)
+                ch = tolower(ch);
 
-            for (int i = 0; i < word.length(); i++)
-            {
-                if (word[word.length() - 1] == ',')
-                    word.erase(word.length() - 1);
-                else if (word[word.length() - 1] == '.') {
-                    word.erase(word.length() - 1);
-                    line++;
-                }
+            int last_i = word.length() - 1;
+            if (word[last_i] == '.') {
+                word.erase(last_i);
+                line++;
             }
+            else if (word[last_i] == ',')
+                word.erase(last_i);
+                
             array[line][word]++;
             words.insert(word);
         }
