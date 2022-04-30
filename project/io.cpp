@@ -1,72 +1,49 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define MX_LINES 80
-
-bool compare(string x, string y)
-{
-    return x < y;
-}
-
-string to_lower_case(string s) {
-    string res = "";
-    for (int i = 0; i < s.length(); i++)
-        s[i] = tolower(s[i]);
-    return s;
-}
+#define MX_LINES 100
 
 int main() {
-
     map<string, int> array[MX_LINES];
-    map<string, int> map;
+    set<string> words;
     int line = 0;
 
     ifstream input;
     input.open("input.txt");
+    ofstream output;
+    output.open("output.csv");
+
     if (input)
     {
-        string data;
+        string word;
         while (input.good()) {
-            input >> data;
-            data = to_lower_case(data);
-            for (int i = 0; i < data.length(); i++)
+            input >> word;
+            for (int i = 0; i < word.length(); i++)
+                word[i] = tolower(word[i]);
+
+            for (int i = 0; i < word.length(); i++)
             {
-                if (data[data.length() - 1] == ',') {
-                    data.erase(data.length() - 1);
-                }
-                else if (data[data.length() - 1] == '.') {
-                    data.erase(data.length() - 1);
+                if (word[word.length() - 1] == ',')
+                    word.erase(word.length() - 1);
+                else if (word[word.length() - 1] == '.') {
+                    word.erase(word.length() - 1);
                     line++;
                 }
             }
-            map[data]++;
-            array[line][data]++;
+            array[line][word]++;
+            words.insert(word);
         }
-
-        vector<string> words;
-        for (auto const& pair : map) {
-            words.push_back(pair.first);
-        }
-        sort(words.begin(), words.end(), compare);
-
-        ofstream output;
-        output.open("output.csv");
 
         output << "line\\word,";
-        for (int i = 0; i < words.size(); i++)
-        {
-            output << words[i] << ", ";
-        }
+        for (auto word : words)
+            output << word << ", ";
         output << endl;
 
         for (int i = 0; i < line; i++)
         {
             output << i << ", ";
-            for (int j = 0; j < words.size(); j++)
-            {
-                output << array[i][words[j]] << ", ";
-            }
+            for (auto word : words)
+                output << array[i][word] << ", ";
             output << endl;
         }
     }
-    else cout << "Error at file opening";
 }
