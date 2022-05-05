@@ -4,18 +4,14 @@ using namespace std;
 int main() {
     string text;
     int n;
-    do {
+    while (true) {
         cin >> text;
         if (text == "*")
-        {
             return 0;
-        }
-        else if (text == "Hajj") {
+        else if (text == "Hajj")
             cout << "Case " << ++n << ": Hajj-e-Akbar";
-        }
-        else {
+        else
             cout << "Case " << ++n << ": Hajj-e-Asghar";
-        }
-    } while (text != "*");
+    }
 }
 

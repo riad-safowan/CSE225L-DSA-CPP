@@ -35,20 +35,12 @@ struct a
     int end;
 };
 
-int indexx = 0;
-int times[MX];
-
-
-//DFT
 void printTreePreOrder(node* root) {
     if (root == NULL) return;
-    times[indexx++] = root->data;
-    // cout << root->data << " ";
+
+    cout << root->data << " ";
     printTreePreOrder(root->left);
     printTreePreOrder(root->right);
-
-    times[indexx++] = root->data;
-
 }
 void printTreeInOrder(node* root) {
     if (root == NULL) return;
@@ -65,7 +57,6 @@ void printTreePostOrder(node* root) {
     cout << root->data << " ";
 }
 
-//BST
 void bfsTravel(node* root) {
     queue<node*> q;
     q.push(root);
@@ -116,15 +107,15 @@ int getHeight(node* root) {
     else return bigger(getHeight(root->left), getHeight(root->right)) + 1;
 }
 
-node* deleteNode(node* root, int key) {
+node* deleteNode(node* root, int item)
+{
     if (root == NULL) return root;
-    else if (key < root->data) root->left = deleteNode(root->left, key);
-    else if (key > root->data) root->right = deleteNode(root->right, key);
+    else if (item < root->data) root->left = deleteNode(root->left, item);
+    else if (item > root->data) root->right = deleteNode(root->right, item);
     else {
-        if (root->left == NULL, root->right == NULL)
-        {
+        if (root->left == NULL && root->right == NULL) {
             delete root;
-            root == NULL;
+            root = NULL;
         }
         else if (root->left == NULL) {
             node* temp = root;
@@ -147,38 +138,44 @@ node* deleteNode(node* root, int key) {
 
 int main() {
     node* root = NULL;
-    // deleteNode(root, 23);
     root = Insert(root, 50);
     root = Insert(root, 40);
     root = Insert(root, 60);
     root = Insert(root, 78);
     root = Insert(root, 70);
 
+    cout << "Pre-Order: ";
     printTreePreOrder(root);
-    cout << endl;
+    cout << endl << "In-Order: ";
     printTreeInOrder(root);
-    cout << endl;
+    cout << endl << "Post-Order: ";
     printTreePostOrder(root);
-    cout << endl;
+    cout << endl << "Min: ";
     cout << findMin(root)->data;
-    cout << endl;
+    cout << endl << "Max: ";
     cout << findMax(root)->data;
     cout << endl;
-    cout << search(root, 235);
-    cout << endl;
-    // deleteNode(root, 50);
-    // deleteNode(root, 190);
-    // deleteNode(root, 40);
-    cout << endl;
-    printTreeInOrder(root);
+    search(root, 70) ? cout << "found" : cout << "not found";
+    cout << endl << "Tree Height: " << getHeight(root);
 
-    // printTreePreOrder(root);
-    // for (int i = 0; i < indexx; i++)
-    // {
-    //     cout << times[i] << " ";
-    // }
+    root = deleteNode(root, 50);
+    root = deleteNode(root, 70);
+    root = deleteNode(root, 40);
 
-    cout << endl << getHeight(root);
+    cout << endl << "Pre-Order(after deleting): ";
+    printTreePreOrder(root);
 }
 
-//height search delete balanced tree 
+/*
+Output:
+
+Pre-Order: 50 40 60 78 70
+In-Order: 40 50 60 70 78
+Post-Order: 40 70 78 60 50
+Min: 40
+Max: 78
+found
+Tree Height: 4
+Pre-Order(after deleting): 60 78
+
+*/
