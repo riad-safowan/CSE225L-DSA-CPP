@@ -117,7 +117,7 @@ node* deleteNode(node* root, int item)
             delete root;
             root = NULL;
         }
-        else if (root->left == NULL) {
+        else if (root->left == NULL) { 
             node* temp = root;
             root = root->right;
             delete temp;
