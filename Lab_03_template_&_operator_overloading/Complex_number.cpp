@@ -25,7 +25,7 @@ class Complex {
     friend bool operator!=(int, Complex);
     friend bool operator!=(Complex, int);
 
-    /*as complex numbers are not directly comparable
+    /*As complex numbers are not directly comparable
     here we are comparing based on their modulus.
     */
     friend bool operator>(Complex, Complex);

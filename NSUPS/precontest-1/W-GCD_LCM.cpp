@@ -1,5 +1,17 @@
 #include<iostream>
+#include<algorithm>
 using namespace std;
+
+int asdf(int m, int n)
+  {
+    while (n != 0)
+    {
+      int t = m % n;
+      m = n;
+      n = t;
+    }
+    return m;
+  }
 
 int gcdd(int m, int n) {
     int a, b;
@@ -47,5 +59,6 @@ int main() {
         int gcd = gcdd(a, b);
         // cout << ((a * b) / lcm) << " " << lcm << endl;
         cout << gcd << " " << (((long long)a * b) / gcd) << endl;
+        cout<<asdf(23,23);
     }
 }

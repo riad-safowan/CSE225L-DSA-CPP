@@ -26,7 +26,7 @@ void dfs(int node){
         }
         else if (color[next] == GRAY){
             cycle = true;
-            return ;
+            return;
         }
     }
 

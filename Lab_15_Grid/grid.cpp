@@ -18,8 +18,8 @@ node previous[row][col];
 //strait[0,3]   = up, down, left, right
 //diagonal[4,7] = up-left, up-right, down-left, down-right
 //knight[8,15]  = up-right, up-left, down-right, down-right, right-up, right-down, left-up, left-down
-int moveX[] = { -1, 1, 0, 0, -1, -1, 1, 1, 1, -1, 1, -1, 2, 2, -2, -2 };
-int moveY[] = { 0, 0, -1, 1, -1, -1, 1, 1, -2, -2, 2, 2, -1, 1, -1, 1 };
+int moveX[] = { -1, 1, 0, 0,     -1, -1, 1, 1,    1, -1, 1, -1, 2, 2, -2, -2 };
+int moveY[] = { 0, 0, -1, 1,     -1, -1, 1, 1,    -2, -2, 2, 2, -1, 1, -1, 1 };
 
 void Initialize() {
     for (int i = 0; i < row; i++)
@@ -57,7 +57,7 @@ void BFS(node start, bool doPrint)
     {
         node n = q.front();
         if (doPrint) cout << "[" << n.x << "," << n.y << "]" << ", ";
-        for (int k = 0; k < 4; k++)
+        for (int k = 8; k < 16; k++)
         {
             if (isValid(n.x + moveX[k], n.y + moveY[k]))
             {
@@ -94,7 +94,7 @@ void printGrid()
         {
             printf("%2d,%2d   ", i, j);
         }
-        cout << endl<<endl;
+        cout << endl << endl;
     }
 }
 void shortestPath(node start, node en)
@@ -123,14 +123,14 @@ int main()
     DFS(2, 2);
     cout << "\n\nBFS: ";
     BFS(node{ 2 , 2 }, true);
-    cout<<endl;
+    cout << endl;
     printLevelGrid();
-    printShortestPath(node{ 1,1 }, node{ 4,4 });
+    printShortestPath(node{ 1,1 }, node{ 1,2 });
     cout << endl << endl;
 }
 
 /*
-The original Grid: 
+The original Grid:
 
  0, 0    0, 1    0, 2    0, 3    0, 4
 

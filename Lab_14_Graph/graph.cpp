@@ -9,7 +9,6 @@ bool visited[MAX_SIZE];
 int level[MAX_SIZE];
 int previous[MAX_SIZE];
 
-
 void Initialize() {
     for (int i = 0; i < node; i++)
         visited[i] = false;
