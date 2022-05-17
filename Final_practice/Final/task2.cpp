@@ -52,20 +52,6 @@ void BFS(node start) {
     }
 }
 
-void printLevelGrid()
-{
-    cout << endl << "Path level: " << endl;
-    for (int i = 0; i < ROW; i++)
-    {
-        for (int j = 0; j < COL; j++)
-        {
-            printf("%3d", level[i][j]);
-        }
-        cout << endl;
-    }
-    cout << endl;
-}
-
 int main() {
     int startX, startY;
     cin >> startX >> startY;

@@ -71,7 +71,6 @@ int main() {
     int startPoint;
     cin >> startPoint;
 
-    int sn;
     Initialize(node + entry + 1);
     BFS(endPoint, node + entry + 1);
     cout << level[startPoint] << endl;
@@ -97,7 +96,6 @@ int main() {
 }
 
 /*
-
 Input:
 4
 0 1 2 3
@@ -120,6 +118,4 @@ Input:
 3 9
 2 7
 2
-
-
 */

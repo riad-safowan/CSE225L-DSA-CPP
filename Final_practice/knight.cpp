@@ -7,7 +7,7 @@ using namespace std;
 //strait[0,3]   = up, down, left, right
 //diagonal[4,7] = up-left, up-right, down-left, down-right
 //knight[8,15]  = up-right, up-left, down-right, down-right, right-up, right-down, left-up, left-down
-int moveX[] = { -1, 1, 0, 0, -1, -1, 1, 1, 1, -1, 1, -1, 2, 2, -2, -2 };
+int moveX[] = { -1, 1, 0, 0, -1, 1, -1, 1, 1, -1, 1, -1, 2, 2, -2, -2 };
 int moveY[] = { 0, 0, -1, 1, -1, -1, 1, 1, -2, -2, 2, 2, -1, 1, -1, 1 };
 
 struct node
