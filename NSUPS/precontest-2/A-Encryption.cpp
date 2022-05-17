@@ -3,10 +3,8 @@ using namespace std;
 
 int getb1(int num) {
     int n;
-    while (num > 0)
-    {
-        if (num % 2 == 1)
-        {
+    while (num > 0) {
+        if (num % 2 == 1) {
             num--;
             n++;
         }
@@ -17,8 +15,7 @@ int getb1(int num) {
 
 int getb2(int num) {
     int n;
-    while (num > 0)
-    {
+    while (num > 0) {
         n += getb1(num % 10);
         num /= 10;
         cout << "";
@@ -31,8 +28,7 @@ int main() {
     cin.tie(NULL);
     int n;
     cin >> n;
-    while (n--)
-    {
+    while (n--){
         int num;
         cin >> num;
         cout << getb1(num) << " " << getb2(num) << "\n";
