@@ -41,14 +41,8 @@ int getResult(int n1, int n2) {
 }
 
 int main() {
-    ifstream input;
-    input.open("input.txt");
-    if (input)
-    {
-        while (input.good()) {
-            int n1, n2;
-            input >> n1 >> n2;
+        int n1, n2;
+        while (cin >> n1 >> n2) {
             cout << getResult(n1, n2)<<endl;
         }
-    }
 }

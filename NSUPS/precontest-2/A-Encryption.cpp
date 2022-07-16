@@ -1,8 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int getb1(int num) {
-    int n;
+long long getb1(long long num) {
+    long long n;
     while (num > 0) {
         if (num % 2 == 1) {
             num--;
@@ -13,23 +13,21 @@ int getb1(int num) {
     return n;
 }
 
-int getb2(int num) {
-    int n;
+long long getb2(long long num) {
+    long long n;
     while (num > 0) {
         n += getb1(num % 10);
         num /= 10;
-        cout << "";
     }
     return n;
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    int n;
+ 
+    long long n;
     cin >> n;
     while (n--){
-        int num;
+        long long num;
         cin >> num;
         cout << getb1(num) << " " << getb2(num) << "\n";
     }
