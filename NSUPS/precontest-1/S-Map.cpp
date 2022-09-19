@@ -1,5 +1,5 @@
-#include<iostream>
-#include<map>
+#include<bits/stdc++.h>
+
 using namespace std;
 int main() {
     int n;
@@ -16,7 +16,7 @@ int main() {
             int marks;
             cin >> name >> marks;
             try {
-                marks += m.at(name);
+                marks += m[name];
             }
             catch (exception e) {}
             m[name] = marks;

@@ -2,16 +2,16 @@
 using namespace std;
 
 int main() {
-    string text;
-    int n;
+    string input;
+    int number;
     while (true) {
-        cin >> text;
-        if (text == "*")
+        cin >> input;
+        if (input == "*")
             return 0;
-        else if (text == "Hajj")
-            cout << "Case " << ++n << ": Hajj-e-Akbar";
+        else if (input == "Hajj")
+            cout << "Case " << ++number << ": Hajj-e-Akbar"<< endl;
         else
-            cout << "Case " << ++n << ": Hajj-e-Asghar";
+            cout << "Case " << ++number << ": Hajj-e-Asghar" << endl;
     }
 }
 
